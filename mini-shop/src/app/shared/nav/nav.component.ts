@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router, Event as NavigationEvent } from '@angular/router';
+import { CartService } from 'src/app/core/services/cart.service';
 
 @Component({
   selector: 'app-nav',
@@ -10,7 +11,7 @@ export class NavComponent implements OnInit {
   events$
   current!: string;
 
-  constructor(private router: Router) {
+  constructor(public cart: CartService, private router: Router) {
     this.events$ = this.router.events
       .subscribe(
         (event: NavigationEvent) => {
