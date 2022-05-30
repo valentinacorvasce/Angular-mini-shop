@@ -75,9 +75,9 @@
                       <i class="icon ion-ios-star gold"></i>
                       <i class="icon ion-ios-star-outline"></i><br> -->
                       <br>
-                      <b>Price: {{active?.price}} €</b>
+                      <b>Price: {{active?.price | number: '1.2'}} €</b>
                   </p>
-              <button class="btn btn-success">Add to cart</button>
+              <button (click)="addToCart(active)" class="btn btn-success">Add to cart</button>
           </div>
 
           <!-- Pager-->

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { CartService } from 'src/app/core/services/cart.service';
 import { Book } from 'src/app/models/Book';
 
 const url = 'http://localhost:3000/books';
@@ -14,7 +15,7 @@ export class HomeComponent {
   books!: Book[];
   active!: Book;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cart: CartService) {
     this.searchBooks(this.text);
   }
 
@@ -29,6 +30,10 @@ export class HomeComponent {
 
   setActive(book: Book): any {
     this.active = book;
+  }
+
+  addToCart(active: Book): any {
+    this.cart.plusToCart(active);
   }
 
 }
