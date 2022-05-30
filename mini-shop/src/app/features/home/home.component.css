@@ -1,0 +1,108 @@
+h1.headerTitle {
+  font-family: 'Indie Flower', cursive;
+  font-size: 7vw !important;
+}
+
+.fa-star.gold {
+  color: #ffd700 !important;
+}
+
+.fa.fa-info-circle.blue {
+  color: dodgerblue !important;
+}
+
+.searchResult img {
+  width: 75px;
+  height: 100px;
+  float: left;
+  margin-right: 10px;
+}
+
+.border-radius {
+  -webkit-box-shadow: 5px 5px 19px 0px #000000;
+  -moz-box-shadow: 5px 5px 19px 0px #000000;
+  -o-box-shadow: 5px 5px 19px 0px #000000;
+  box-shadow: 5px 5px 19px 0px #000000;
+  padding: 8px;
+  overflow-y: scroll;
+  height: 320px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.form {
+  position: relative
+}
+
+.form .fa-search {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #9ca3af;
+  font-size: 15px !important;
+}
+
+.form span {
+  position: absolute;
+  float: right;
+  right: 0px;
+  top: 0px;
+  border-left: 1px solid #d1d5db;
+}
+
+.form span button.btn-secondary {
+  border-bottom-right-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  background-color: #919294 !important;
+}
+
+.left-pan {
+  padding-left: 7px;
+}
+
+.left-pan i {
+  padding-left: 10px
+}
+
+.form-input {
+  height: 55px;
+  text-indent: 33px;
+  border-radius: 10px !important
+}
+
+.form-input:focus {
+  box-shadow: none;
+  border: none
+}
+
+.active {
+  background-color: #333;
+  margin-left: 8px;
+  transition: ease 0.3s;
+}
+
+.active>p {
+  color: white;
+}
+
+.gold {
+  color: #ffd700;
+}
