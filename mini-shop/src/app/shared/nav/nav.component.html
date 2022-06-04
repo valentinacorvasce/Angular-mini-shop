@@ -1,16 +1,23 @@
  <!-- Navigation-->
  <nav class="navbar navbar-expand-lg navbar-light" id="mainNav" [ngClass]="this.current === '/cart' || this.current === '/login' || this.current === '/register' ? 'navbar-dark bg-dark': 'navbar-light'">
   <div class="container px-4 px-lg-5">
-    <a class="navbar-brand" routerLink="/" ><i class="fa fa-book fs-3"></i> <span class="grey">ChildrenBook</span></a>
+    <div *ngIf="auth.isLogged(); else noLogged">
+      <a class="navbar-brand" routerLink="/" ><i class="fa fa-book fs-3"></i> <span class="grey">ChildrenBook</span></a>
+    </div>
+    <ng-template #noLogged>
+      <a class="navbar-brand"><i class="fa fa-book fs-3"></i> <span class="grey">ChildrenBook</span></a>
+    </ng-template>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-auto py-4 py-lg-0">
-            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="login">Login</a></li>
-            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"routerLink="cart"><i class="fa fa-cart-arrow-down fs-5"></i> <span *ngIf="cart.items.length">(<span style="background-color:#f00;">Ci sono Prodotti!</span>)<!-- ({{cart.items.length}}) --></span></a></li>
+            <li *ngIf="auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="/">Home</a></li>
+            <li *ngIf="!auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="login"><i class="fa fa-user"></i> Login</a></li>
+            <li *ngIf="auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"routerLink="cart"><i class="fa fa-cart-arrow-down fs-5"></i> <span *ngIf="cart.items.length">(<span style="background-color:#f00;">Ci sono Prodotti!</span>)<!-- ({{cart.items.length}}) --></span></a></li>
+            <li *ngIf="auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" (click)="auth.logout()" style="cursor:pointer;"><i class="fa fa-user"></i> Logout</a></li>
+            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4">{{auth.data?.name}}</a></li>
           </ul>
       </div>
   </div>
