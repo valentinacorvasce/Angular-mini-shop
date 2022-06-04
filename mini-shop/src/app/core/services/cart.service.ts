@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Book } from 'src/app/models/Book';
 import { CartItem } from 'src/app/models/cart-item';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { CartItem } from 'src/app/models/cart-item';
 export class CartService {
   items: CartItem[] = [];
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   plusToCart(book: Book): any {
     let index = this.items.findIndex(i => i.book.id === book.id);
@@ -56,6 +57,8 @@ export class CartService {
 
   proceed(): any {
     /* window.alert(this.items.length); */
+    console.log(`Utente: ${this.auth.data.name}
+                  Email: ${this.auth.data.email}`);
   }
 
 

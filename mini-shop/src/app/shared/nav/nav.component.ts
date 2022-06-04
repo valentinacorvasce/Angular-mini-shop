@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router, Event as NavigationEvent } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class NavComponent implements OnInit {
   events$
   current!: string;
 
-  constructor(public cart: CartService, private router: Router) {
+  constructor(public cart: CartService, private router: Router, public auth: AuthService) {
     this.events$ = this.router.events
       .subscribe(
         (event: NavigationEvent) => {
