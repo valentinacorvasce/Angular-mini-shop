@@ -1,31 +1,37 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { BooksService } from 'src/app/core/services/books.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { Book } from 'src/app/models/Book';
 
-const url = 'http://localhost:3000/books';
+const url = 'http://localhost/php-auth-api/index.php';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  text = "Ragazzi";
+export class HomeComponent implements OnInit {
+  text: any;
   books!: Book[];
   active!: Book;
+  error: any;
 
-  constructor(private http: HttpClient, private cart: CartService) {
-    this.searchBooks(this.text);
+  constructor(private http: HttpClient, private cart: CartService, public auth: AuthService, private list: BooksService) {
+
+  }
+  ngOnInit(): void {
+    this.getAll();
   }
 
-  searchBooks(text: string): any {
-    this.http.get<Book[]>(`${url}?q=${text}`)
-      .subscribe(res => {
-        this.books = res
-        this.text = text;
+  getAll() {
+    this.list.getAll()
+      .subscribe((res: Book[]) => {
+        this.books = res;
         this.active = this.books[0];
-      })
+      },
+        err => this.error = err);
   }
 
   setActive(book: Book): any {
@@ -34,6 +40,10 @@ export class HomeComponent {
 
   addToCart(active: Book): any {
     this.cart.plusToCart(active);
+
+    if (!this.auth.isLogged()) {
+      window.alert("Se vuoi acquistare questo testo fai Login!");
+    }
   }
 
 }

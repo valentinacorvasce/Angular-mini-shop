@@ -6,8 +6,8 @@
               <div class="site-heading">
                   <h1 class="headerTitle">Clean Blog</h1>
                   <span class="subheading">
-                    <form  #f="ngForm" (submit)="searchBooks(f.value.text)">
-                          <div class="form"><i class="fa fa-search fs-4"></i><input type="text" class="form-control form-input" [ngModel]="text" name="text" placeholder="Search Book..."> <span class="left-pan"><button class="btn btn-secondary"  type="submit">Search</button></span> </div>
+                    <form>
+                          <div class="form"><i class="fa fa-search fs-4"></i><input type="text" class="form-control form-input" autocomplete="off" [(ngModel)]="text" name="text" placeholder="Search Book..."> <span class="left-pan"><button class="btn btn-secondary"  type="submit">Search</button></span> </div>
                     </form>
                 </span>
               </div>
@@ -20,19 +20,21 @@
   <div class="row gx-4 gx-lg-5">
       <!--search result-->
       <div class="col-sm-6 border-radius mb-3">
-          <small><b>Result for {{text}}: {{this.books?.length}} items</b></small>
+        <div *ngIf="error" class="alert alert-danger">Error</div>
+          <small><b>Results for word: {{text}} <br> Total items: {{this.books?.length}}</b></small>
           <hr class="my-1" />
           <!-- Search preview-->
           <!-- <pre>{{books | json}}</pre> -->
-          <div class="post-preview searchResult" *ngFor="let book of books" (click)="setActive(book)" [ngClass]="{'active': book.id === this.active?.id}">
-              <img [src]="book.images" class="img-fluid" alt="">
+          <app-spinner *ngIf="!books"></app-spinner>
+          <div class="post-preview searchResult" *ngFor="let book of books | filter: text" (click)="setActive(book)" [ngClass]="{'active': book.id === this.active?.id}">
+              <img [src]="book.imageLink" class="img-fluid" alt="">
                   <h2 class="post-title">{{book.title}}</h2>
                   <p class="post-meta">Autore: <em><i>{{book.author}}</i></em>
                       <br>
                       Isbn: {{book.isbn}}
                   </p>
                    <!-- Divider-->
-          <hr class="my-4" />
+            <hr class="my-4" />
           </div>
       </div>
       <!--feedback and cart-->
@@ -51,7 +53,7 @@
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                              {{active?.description}}
+                              {{active?.descr}}
                           </div>
                           <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -62,9 +64,9 @@
                   <p class="post-meta">
                       Author: {{active?.author}} <br>
                       Isbn: {{active?.isbn}}<br>
-                      Pagine: {{active?.pagine}}<br>
-                      Categorie: {{active?.categoria}}<br>
-                      Anno di uscita: {{active?.anno}}<br>
+                      Pagine: {{active?.pages}}<br>
+                      Categorie: {{active?.category}}<br>
+                      Anno di uscita: {{active?.year}}<br>
                       Feedback:
                       <i *ngFor="let star of 5 | inToArray; index as i"
                       class="icon"

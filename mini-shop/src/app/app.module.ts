@@ -12,6 +12,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InToArrayPipe } from './shared/pipes/in-to-array.pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 
 @NgModule({
@@ -23,13 +25,15 @@ import { InToArrayPipe } from './shared/pipes/in-to-array.pipe';
     RegisterComponent,
     NavComponent,
     FooterComponent,
-    InToArrayPipe
+    InToArrayPipe,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,7 +13,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-auto py-4 py-lg-0">
-            <li *ngIf="auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="/">Home</a></li>
             <li *ngIf="!auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="login"><i class="fa fa-user"></i> Login</a></li>
             <li *ngIf="auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"routerLink="cart"><i class="fa fa-cart-arrow-down fs-5"></i> <span *ngIf="cart.items.length">(<span style="background-color:#f00;">Ci sono Prodotti!</span>)<!-- ({{cart.items.length}}) --></span></a></li>
             <li *ngIf="auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" (click)="auth.logout()" style="cursor:pointer;"><i class="fa fa-user"></i> Logout</a></li>
