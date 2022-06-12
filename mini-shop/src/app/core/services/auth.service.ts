@@ -17,7 +17,7 @@ export class AuthService {
 
     const params = new HttpParams()
       .set('email', form.email)
-      .set('pass', form.pass)
+      .set('password', form.pass)
 
     this.http.get<Auth>(url, { params })
       .subscribe(res => {
