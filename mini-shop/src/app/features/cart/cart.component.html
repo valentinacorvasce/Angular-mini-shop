@@ -13,7 +13,7 @@
                                   </li>
                                   <br>
                               </ul>
-                              <p>Totale: <span style="color:red" *ngIf="cart.items.length">{{locationSum() | number: '1.2'}} €</span> <button (click)="cart.proceed()" class="btn btn-success float-end">Proceed</button></p>
+                              <p>Totale: <span style="color:red" *ngIf="cart.items.length">{{(locationSum() | number: '1.2')}} €</span> <button (click)="cart.proceed()" class="btn btn-success float-end">Proceed</button></p>
                           </div>
                           <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 

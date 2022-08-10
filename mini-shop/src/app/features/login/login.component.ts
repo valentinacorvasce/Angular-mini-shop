@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Auth } from 'src/app/models/auth';
+import { Observable, first } from 'rxjs';
+
 
 @Component({
   selector: 'app-login',
@@ -9,24 +12,50 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  modelEmail!: string;
-  modelPass!: string;
-  showMsg!: string;
+  loginForm!: FormGroup;
+  error: any = '';
 
-  constructor(public auth: AuthService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, public auth: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    });
   }
 
-  sendLogin(form: NgForm) {
+  get f() {
+    return this.loginForm.controls;
+  }
+
+  onSubmit() {
+    if (this.loginForm.invalid) {
+      return;
+    }
+    this.auth
+      .login(this.f.email.value, this.f.password.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.router.navigateByUrl('home');
+        },
+        error: (error) => {
+          this.error = error;
+        },
+      });
+  }
+
+  /* login(form: any) {
     this.auth.login(form)
       .subscribe(res => {
-        alert('Il token passato è: ' + res)
-        this.router.navigateByUrl('book')
-      },
-        error => this.showMsg = error
-      )
+        this.data = res;
+        console.log(this.data);
+        this.router.navigateByUrl('home');
+      })
+  } */
 
-  }
+
 
 }
+
+
