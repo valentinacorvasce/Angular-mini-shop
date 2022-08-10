@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BooksService } from 'src/app/core/services/books.service';
 import { CartService } from 'src/app/core/services/cart.service';
+import { Auth } from 'src/app/models/auth';
 import { Book } from 'src/app/models/Book';
 
 const url = 'http://localhost/php-auth-api/index.php';
@@ -17,9 +18,10 @@ export class HomeComponent implements OnInit {
   books!: Book[];
   active!: Book;
   error: any;
+  currentUser!: Auth;
 
   constructor(private http: HttpClient, private cart: CartService, public auth: AuthService, private list: BooksService) {
-
+    this.auth.user.subscribe(user => this.currentUser = user);
   }
   ngOnInit(): void {
     this.getAll();

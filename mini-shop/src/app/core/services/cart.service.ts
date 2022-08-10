@@ -57,8 +57,7 @@ export class CartService {
 
   proceed(): any {
     /* window.alert(this.items.length); */
-    console.log(`Utente: ${this.auth.data.name}
-                  Email: ${this.auth.data.email}`);
+    console.log(`Email: ${this.auth.userSubject._value.email}`);
   }
 
 
